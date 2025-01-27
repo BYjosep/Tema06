@@ -22,7 +22,70 @@ public class Jugador {
         this.tiro = tiro;
         this.estadoForma = estadoForma;
     }
+
+
     public Jugador(String nombre) {
         this(nombre, 50,50,50,50,50,50);
+    }
+
+    public static float getEstadoForma() {
+        return estadoForma;
+    }
+
+    public static void setEstadoForma(float estadoForma) {
+        Jugador.estadoForma = estadoForma;
+    }
+
+    public static float getTiro() {
+        return tiro;
+    }
+
+    public static void setTiro(float tiro) {
+        Jugador.tiro = tiro;
+    }
+
+    public static float getRegate() {
+        return regate;
+    }
+
+    public static void setRegate(float regate) {
+        Jugador.regate = regate;
+    }
+
+    public static float getPase() {
+        return pase;
+    }
+
+    public static void setPase(float pase) {
+        Jugador.pase = pase;
+    }
+
+    public static float getDefensa() {
+        return defensa;
+    }
+
+    public static void setDefensa(float defensa) {
+        Jugador.defensa = defensa;
+    }
+
+    public static float getPortero() {
+        return portero;
+    }
+
+    public static void setPortero(float portero) {
+        Jugador.portero = portero;
+    }
+
+    public static String getNombre() {
+        return nombre;
+    }
+
+    public static void setNombre(String nombre) {
+        Jugador.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Jugador{}";
     }
 }
