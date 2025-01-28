@@ -43,7 +43,7 @@ public class LibFloats {
         float numero;
         do {
             System.out.println(texto);
-            numero = Integer.parseInt(scanner.nextLine());
+            numero = Float.parseFloat(scanner.nextLine());
 
         } while (numero < min);
 
@@ -65,7 +65,7 @@ public class LibFloats {
 
         do {
             System.out.println(texto);
-            numero = Integer.parseInt(scanner.nextLine());
+            numero = Float.parseFloat(scanner.nextLine());
         } while (numero < min && numero > max);
 
         return numero;

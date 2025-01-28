@@ -1,5 +1,7 @@
 package com.BYjosep.Tema06.Ejercicio0;
 
+import java.util.Arrays;
+
 public class Jugador {
     public static void main(String[] args) {
 
@@ -22,6 +24,12 @@ public class Jugador {
         this.tiro = tiro;
         this.estadoForma = estadoForma;
     }
+
+
+    protected static void entrenarPase(){
+
+    }
+
 
 
     public Jugador(String nombre) {

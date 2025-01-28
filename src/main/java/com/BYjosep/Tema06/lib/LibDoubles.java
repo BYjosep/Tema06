@@ -1,9 +1,43 @@
 package com.BYjosep.Tema06.lib;
 
 import java.lang.reflect.Array;
+import java.util.Scanner;
 
 
 public class LibDoubles {
+
+    public static Scanner scanner = new Scanner(System.in);
+
+    /**
+     * cerrar {@link Scanner Scanner}
+     */
+    public static void cerrarScaner() {
+        scanner.close();
+    }
+
+    /* **********************
+     *********  in  *********
+     ************************ */
+
+    /**
+     * Ingresar text.
+     * Recuerde cerrar {@link Scanner Scanner} con el metodo cerrarScaner
+     * (Echo para no tener que estar escribiendo este codigo en cada ejercicio)
+     *
+     * @return Devuelve la frase ingresada en formato {@link Character char}
+     */
+    public static Double ingresarUnNumeroD(String texto) {
+        System.out.println(texto);
+
+        return Double.parseDouble(scanner.nextLine());
+
+    }
+
+
+
+    /* **********************
+     *********  out  ********
+     ************************ */
 
     /**
      * Ingrese un {@link  Array array} para calcular la media
