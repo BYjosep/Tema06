@@ -31,7 +31,7 @@ public class Punto {
         this.y = y;
     }
 
-    public static String distance(Punto punto1) {
+    public static String distancis(Punto punto1) {
         double p1x = punto1.getX();
         double p1y = punto1.getY();
         double p2x = LibDoubles.ingresarUnNumeroD("Ingrese el valor de x");

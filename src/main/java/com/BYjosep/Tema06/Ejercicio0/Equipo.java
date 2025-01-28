@@ -21,7 +21,7 @@ public class Equipo {
     }
     public void entrenar() {
         for (Jugador j : jugadores) {
-            j.entrenarPase();
+            Jugador.entrenarPase();
         }
     }
     // Resto de métodos
