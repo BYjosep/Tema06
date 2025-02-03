@@ -1,6 +1,12 @@
 package com.BYjosep.Tema06;
 
 public class TODO {
-    // todo hacer el Ejercicio5
-    //todo Ejercicio3 lo que se pueda
+    // todo hacer una clase pila
+
+    /*
+    atributos:
+    maximo, multiplicar la pila, añador elementos. qUitar elementos
+
+    esta bacio_
+     */
 }
