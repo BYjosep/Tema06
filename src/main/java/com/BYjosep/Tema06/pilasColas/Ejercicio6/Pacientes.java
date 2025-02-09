@@ -1,26 +1,40 @@
 package com.BYjosep.Tema06.pilasColas.Ejercicio6;
 
-import com.BYjosep.Tema06.lib.LibInStrings;
-
 import java.time.LocalDateTime;
 
-public class pacientes {
+public class Pacientes {
     public String nombre;
     public String sip;
     public LocalDateTime fechaHoraIngreso;
     public LocalDateTime fechaHoraLlegada;
     private static final String SIP_INCORRECT = "El SIP es  incorrecto";
 
-    public pacientes(String nombre, String sip) {
-        if (sip == null) {
-            System.err.println("Porfavor ingrese un sip valido");
-        }
+    public Pacientes() {
+        this.nombre = null;
+        this.sip = null;
+        this.fechaHoraIngreso = null;
+        this.fechaHoraLlegada = null;
+    }
+
+    public Pacientes(String nombre, String sip, LocalDateTime fechaHoraConsulta) {
 
         this.nombre = nombre;
         this.sip = setSip(sip);
-
+        this.fechaHoraIngreso = fechaHoraConsulta;
+        this.fechaHoraLlegada = LocalDateTime.MIN;
+        if (sip == null) {
+            System.err.println("Porfavor ingrese un sip valido");
+            System.err.println("Para ello use el metodo setSip");
+        }
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setFechaHoraIngreso(LocalDateTime fechaHoraIngreso) {
+        this.fechaHoraIngreso = fechaHoraIngreso;
+    }
 
     /**
      *
@@ -49,5 +63,17 @@ public class pacientes {
     }
 
 
+    public void setFechaHoraLlegada(LocalDateTime fechaHoraLlegada) {
+        this.fechaHoraLlegada = fechaHoraLlegada;
+    }
 
+    @Override
+    public String toString() {
+        return "Pacientes{" +
+                "nombre='" + nombre + '\'' +
+                ", sip='" + sip + '\'' +
+                ", fechaHoraIngreso=" + fechaHoraIngreso +
+                ", fechaHoraLlegada=" + fechaHoraLlegada +
+                '}';
+    }
 }
