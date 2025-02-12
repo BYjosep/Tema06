@@ -6,7 +6,7 @@ public class DynamicArray<D> {
     /*
       Como aún no hemos visto las Exception de momento utilizamos el menos infinito para detectar errores
     */
-    private static final String ERROR = null;
+    private final D ERROR = null;
     /* Capacidad inicial por defecto del array */
     private final static int DEFAULT_CAPACITY = 10;
     /* Factor de crecimiento */
@@ -28,8 +28,7 @@ public class DynamicArray<D> {
      * @param capacity Capacidad inicial
      */
     public DynamicArray(int capacity) {
-        D[] temp = (D[]) new Object[capacity];
-        data = (D[]) temp;
+        data = (D[]) new Object[capacity];
         size = 0;
     }
 
@@ -39,10 +38,10 @@ public class DynamicArray<D> {
      * @param index Índice del elemento a obtener
      * @return el valor obtenido o ERROR
      */
-    public String get(int index) {
+    public D get(int index) {
         if (index >= size || index < 0)
-            return ERROR;
-        return (String) data[index];
+            return (D)ERROR;
+        return data[index];
     }
 
     /**
@@ -105,12 +104,12 @@ public class DynamicArray<D> {
      * @param index posición a eliminar
      * @return El valor eliminado
      */
-    public <D> String remove(int index) {
+    public D remove(int index) {
         if (index >= size || index < 0)
-            return ERROR;
+            return (D)ERROR;
         D valor = (D) data[index];
         moveToLeft(index);
-        return (String) valor;
+        return  valor;
     }
 
     /**
@@ -119,7 +118,7 @@ public class DynamicArray<D> {
      * @param value valor a eliminar
      * @return true si se ha borrado el elemento, false en caso contrario
      */
-    public <D> boolean remove(D value) {
+    public boolean remove(D value) {
         for (int i = 0; i < size; i++) {
             if (data[i] == value) {
                 moveToLeft(i);
@@ -138,7 +137,7 @@ public class DynamicArray<D> {
     public boolean set(int index, D value) {
         if (index >= size || index < 0)
             return false;
-        data[index] = (D) value;
+        data[index] = value;
         return true;
     }
 

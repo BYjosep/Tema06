@@ -7,10 +7,7 @@ public class Consulta {
     private Medico medico;
     private Pacientes paciente;
 
-    public Consulta(Pacientes paciente) {
-        this.idConsulta = idConsulta++;
-        this.paciente = new Pacientes();
-    }
+
     public Consulta(LocalDateTime fechaHoraConsulta,String nombrePaciente, String sipPaciente) {
         this.idConsulta = idConsulta++;
         this.paciente = new Pacientes(nombrePaciente,sipPaciente,fechaHoraConsulta);

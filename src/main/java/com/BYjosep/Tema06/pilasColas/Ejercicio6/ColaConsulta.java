@@ -1,31 +1,27 @@
 package com.BYjosep.Tema06.pilasColas.Ejercicio6;
 
-import java.time.LocalDateTime;
+import com.BYjosep.Tema06.pilasColas.Generics.Cola;
 
 public class ColaConsulta {
-    private int idColaconsulta= 0;
-    private Consulta[] consulta;
-    private Medico[] medico;
-    private final int tamanoCola = 5;
+    private Medico medico; // Médico asignado a la consulta.
+    private Cola<Pacientes> cola; // Cola de pacientes.
 
-    public ColaConsulta() {
-        this.idColaconsulta = idColaconsulta++;
-        consulta = setConsulta();
-        medico = new Medico[tamanoCola];
+    // Constructor: inicializa el médico y la cola.
+    public ColaConsulta(Medico medico) {
+        this.medico = medico;
+        this.cola = new Cola<>();
     }
 
-    public Consulta[] setConsulta() {
-        Consulta[] consulta= new Consulta[tamanoCola];
-        for (int i = 0; i < tamanoCola; i++) {
-            consulta[i] = Consulta(fechaHoraConsulta, nombrePaciente, sipPaciente);
-        }
-        return consulta;
+    public Medico getMedico() {
+        return medico;
     }
 
-    public Medico[] setMedico() {
-        Medico[] medico= new Medico[tamanoCola];
-        for (int i = 0; i < tamanoCola; i++) {
-            medico[i]= Medico(String nombre, int numeroColegiado, LocalDateTime horaConsulta)
-        }
+    public Cola<Pacientes> getCola() {
+        return cola;
+    }
+
+    @Override
+    public String toString() {
+        return "Médico: " + medico.getNombre() + ", Cola: " + cola.toString();
     }
 }

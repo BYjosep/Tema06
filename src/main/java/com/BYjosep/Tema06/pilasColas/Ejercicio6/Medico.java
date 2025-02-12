@@ -53,7 +53,6 @@ public class Medico {
                 "nombre='" + nombre + '\'' +
                 ", numeroColegiado='" + numeroColegiado + '\'' +
                 ", horaConsulta=" + horaConsulta +
-                ", NUMERO_COLEGIADO_DEFAULT='" + NUMERO_COLEGIADO_DEFAULT + '\'' +
                 '}';
     }
 

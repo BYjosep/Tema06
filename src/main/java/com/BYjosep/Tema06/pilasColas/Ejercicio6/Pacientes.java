@@ -3,68 +3,44 @@ package com.BYjosep.Tema06.pilasColas.Ejercicio6;
 import java.time.LocalDateTime;
 
 public class Pacientes {
-    public String nombre;
-    public String sip;
-    public LocalDateTime fechaHoraIngreso;
-    public LocalDateTime fechaHoraLlegada;
-    private static final String SIP_INCORRECT = "El SIP es  incorrecto";
-
-    public Pacientes() {
-        this.nombre = null;
-        this.sip = null;
-        this.fechaHoraIngreso = null;
-        this.fechaHoraLlegada = null;
-    }
+    private String nombre;
+    private String sip;
+    private LocalDateTime fechaHoraIngreso;
+    private LocalDateTime fechaHoraLlegada;
 
     public Pacientes(String nombre, String sip, LocalDateTime fechaHoraConsulta) {
-
         this.nombre = nombre;
-        this.sip = setSip(sip);
+        this.sip = setSip(sip); // Validar el SIP.
         this.fechaHoraIngreso = fechaHoraConsulta;
         this.fechaHoraLlegada = LocalDateTime.MIN;
-        if (sip == null) {
-            System.err.println("Porfavor ingrese un sip valido");
-            System.err.println("Para ello use el metodo setSip");
+
+        if (this.sip == null) { // Si el SIP es nulo, mostrar mensaje de error.
+            System.err.println("Por favor, ingrese un SIP válido.");
         }
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setFechaHoraIngreso(LocalDateTime fechaHoraIngreso) {
-        this.fechaHoraIngreso = fechaHoraIngreso;
-    }
-
-    /**
-     *
-     * @param sip parametro de entrada que necesita verificar que todos los caracteres
-     * del String menos el último son numeros y comprobando que el último caracter es
-     * una letra
-     * @return en caso de estar bien retorna el sip, de lo contrario retorna null
-     */
     public String setSip(String sip) {
-        sip = sip.toUpperCase();
-        if (sip.length() == 9) {
-            for (int i = 0; i < sip.length() - 1; i++) {
-                if (!Character.toString(sip.charAt(i)).equals("[0-1]")) {
-                    System.err.println(SIP_INCORRECT);
-                    return null;
-                }
-            }
-            if (Character.toString(sip.charAt(sip.length() - 1)).equals("[A-Z]")) {
-                return sip;
-            }
-        } else {
-            System.err.println(SIP_INCORRECT);
+        if (sip == null || sip.length() != 9) {
+            System.err.println("El SIP es incorrecto");
             return null;
         }
-        return null;
+        // Verificar que los primeros 8 caracteres sean dígitos.
+        for (int i = 0; i < 8; i++) {
+            if (!Character.isDigit(sip.charAt(i))) {
+                System.err.println("El SIP es incorrecto");
+                return null;
+            }
+        }
+        // Verificar que el último carácter sea una letra.
+        if (!Character.isLetter(sip.charAt(8))) {
+            System.err.println("El SIP es incorrecto");
+            return null;
+        }
+        return sip.toUpperCase(); // Retorna el SIP en mayúsculas.
     }
 
-
-    public void setFechaHoraLlegada(LocalDateTime fechaHoraLlegada) {
-        this.fechaHoraLlegada = fechaHoraLlegada;
+    public String getSip() {
+        return sip;
     }
 
     @Override
@@ -73,7 +49,6 @@ public class Pacientes {
                 "nombre='" + nombre + '\'' +
                 ", sip='" + sip + '\'' +
                 ", fechaHoraIngreso=" + fechaHoraIngreso +
-                ", fechaHoraLlegada=" + fechaHoraLlegada +
                 '}';
     }
 }

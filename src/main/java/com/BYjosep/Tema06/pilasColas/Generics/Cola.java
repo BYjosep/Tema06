@@ -1,5 +1,6 @@
 package com.BYjosep.Tema06.pilasColas.Generics;
 
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -60,10 +61,10 @@ public class Cola<T> {
      * @param index Índice del elemento a obtener
      * @return el valor obtenido o ERROR
      */
-    private <T> String get(int index) {
+    private T get(int index) {
         if (index >= size || index < 0)
-            return ERROR;
-        return (String) data[index];
+            return null;
+        return  data[index];
     }
 
     /**
@@ -72,7 +73,10 @@ public class Cola<T> {
      * @return true
      */
     public boolean add(T value) {
-        add(1, value);
+        if (isFull()) {
+            expand(); // Ampliar la capacidad si está llena.
+        }
+        data[size++] = value; // Agregar el valor y aumentar el tamaño.
         return true;
     }
 
@@ -115,17 +119,16 @@ public class Cola<T> {
         size--;
     }
 
-    public <T> String remove() {
-        return remove(size - 1);
+    public T remove() {
+        return remove(size-1);
     }
 
-
-    private <T> String remove(int index) {
+    private T  remove(int index) {
         if (index >= size || index < 0)
-            return ERROR;
+            return null;
         T valor = (T) data[index];
         moveToLeft(index);
-        return (String) valor;
+        return  valor;
     }
 
 
@@ -158,11 +161,16 @@ public class Cola<T> {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[ ");
-        for (int i = 0; i < size; i++)
-            sb.append(data[i]).append(" ");
+        if (size == 0) return "[ ]"; // Si la cola está vacía, retorna "[ ]".
+        StringBuilder sb = new StringBuilder("[ ");
+        for (int i = 0; i < size; i++) {
+            sb.append(data[i]).append(" "); // Agregar cada elemento separado por espacios.
+        }
         sb.append("]");
         return sb.toString();
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 }

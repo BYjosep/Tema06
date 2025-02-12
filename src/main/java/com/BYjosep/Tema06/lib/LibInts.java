@@ -80,4 +80,25 @@ public class LibInts {
         return numero;
     }
 
+    /**
+     * Ingresar número con valor minimo y maximo.
+     * Recuerde cerrar {@link Scanner Scanner} con el metodo cerrarScaner
+     * (Echo para no tener que estar escribiendo este codigo en cada ejercicio)
+     *
+     * @return Devuelve la frase ingresada en formato {@link Character char}
+     */
+    public static int ingresarUnNumero(String texto, int min, int max, String mensajeError) {
+        int numero;
+
+        do {
+            System.out.println(texto);
+            numero = Integer.parseInt(scanner.nextLine());
+            if (numero < min && numero > max) {
+                System.out.println(mensajeError);
+            }
+        } while (numero < min && numero > max);
+
+        return numero;
+    }
+
 }
