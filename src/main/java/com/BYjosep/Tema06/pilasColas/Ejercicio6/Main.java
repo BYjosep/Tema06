@@ -4,12 +4,17 @@ import com.BYjosep.Tema06.lib.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        // Crear el hospital con 5 consultas y médicos asignados.
-        Hospital hospital = new Hospital();
 
-        // Inicializar el escáner para leer entradas del usuario.
-        Scanner scanner = new Scanner(System.in);
+    // Crear el hospital con 5 consultas y médicos asignados.
+    private static Hospital hospital = new Hospital();
+
+    // Inicializar el escáner para leer entradas del usuario.
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        menu();
+    }
+    public static void menu() {
         int opcion;
 
         // Ciclo principal del programa: mostrar el menú hasta que el usuario elija salir.
@@ -44,6 +49,7 @@ public class Main {
             }
         } while (opcion != 4); // Repetir mientras el usuario no elija salir.
 
-        LibInts.cerrarScaner(); // Cerrar el escáner al finalizar.
+        LibInts.cerrarScaner();
+        scanner.close();// Cerrar el escáner al finalizar.
     }
 }

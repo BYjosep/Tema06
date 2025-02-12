@@ -28,13 +28,13 @@ public class Pacientes {
         for (int i = 0; i < 8; i++) {
             if (!Character.isDigit(sip.charAt(i))) {
                 System.err.println("El SIP es incorrecto");
-                return null;
+                Main.menu();
             }
         }
         // Verificar que el último carácter sea una letra.
         if (!Character.isLetter(sip.charAt(8))) {
             System.err.println("El SIP es incorrecto");
-            return null;
+            Main.menu();
         }
         return sip.toUpperCase(); // Retorna el SIP en mayúsculas.
     }

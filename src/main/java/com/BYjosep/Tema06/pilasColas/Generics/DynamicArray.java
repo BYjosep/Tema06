@@ -1,6 +1,7 @@
 package com.BYjosep.Tema06.pilasColas.Generics;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class DynamicArray<D> {
     /*
@@ -32,6 +33,17 @@ public class DynamicArray<D> {
         size = 0;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        DynamicArray<?> that = (DynamicArray<?>) o;
+        return size == that.size && Objects.deepEquals(data, that.data);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Arrays.hashCode(data), size);
+    }
 
     /**
      * Obtiene el elemento que ocupa el índice index
@@ -178,7 +190,3 @@ public class DynamicArray<D> {
         return sb.toString();
     }
 }
-
-
-
-
