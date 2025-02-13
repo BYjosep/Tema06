@@ -134,7 +134,7 @@ public class Pila<P> {
         pila = (P[]) new Object[pila.length];
     }
 
-    public P[] clone(P[] pila){
+    public P[] clone(){
         P[] newPila = (P[]) new Object[size];
 
         for (int i = 0; i < size; i++) {
@@ -143,4 +143,40 @@ public class Pila<P> {
 
         return newPila;
     }
+
+    public void clone(P[] newPila){
+        for (int i = 0; i < size; i++) {
+            newPila[i] = data[i];
+        }
+    }
+    public String peekToStr(int index){
+        StringBuilder sb =  new StringBuilder();
+
+        sb.append("Las últimas ").append(index).append(" posiciones son [ ");
+        for (int i = size; i >(size-index) ; i--) {
+            sb.append(data[i]).append(" ");
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    public void peek(int index){
+        StringBuilder sb =  new StringBuilder();
+
+        sb.append("Las últimas ").append(index).append(" posiciones son [ ");
+        for (int i = size; i >(size-index) ; i--) {
+            sb.append(data[i]).append(" ");
+        }
+        sb.append("]");
+        System.out.println(sb);
+    }
+
+    public P[] reverse() {
+        P[] aux = (P[]) new Object[size];
+        for  (int i = 0; i <= size; i++) {
+            aux[i] = data[size - i - 1];
+        }
+        return aux;
+    }
+
 }
