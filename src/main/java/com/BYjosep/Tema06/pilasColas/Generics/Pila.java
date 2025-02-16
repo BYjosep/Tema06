@@ -152,6 +152,7 @@ public class Pila<T> {
     }
 
     public void clone(T[] newPila){
+        newPila = (T[]) new Object[size];
         for (int i = 0; i < size; i++) {
             newPila[i] = data[i];
         }
@@ -180,7 +181,7 @@ public class Pila<T> {
 
     public T[] reverse() {
         T[] aux = (T[]) new Object[size];
-        for  (int i = 0; i <= size; i++) {
+        for (int i = 0; i < size; i++) {
             aux[i] = data[size - i - 1];
         }
         return aux;
