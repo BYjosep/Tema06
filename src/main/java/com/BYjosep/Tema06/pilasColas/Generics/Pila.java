@@ -144,24 +144,20 @@ public class Pila<T> {
     public T[] clone(){
         T[] newPila = (T[]) new Object[size];
 
-        for (int i = 0; i < size; i++) {
-            newPila[i] = data[i];
-        }
+        System.arraycopy(data, 0, newPila, 0, size);
 
         return newPila;
     }
 
     public void clone(T[] newPila){
         newPila = (T[]) new Object[size];
-        for (int i = 0; i < size; i++) {
-            newPila[i] = data[i];
-        }
+        System.arraycopy(data, 0, newPila, 0, size);
     }
     public String peekToStr(int index){
         StringBuilder sb =  new StringBuilder();
 
         sb.append("Las últimas ").append(index).append(" posiciones son [ ");
-        for (int i = size; i >(size-index) ; i--) {
+        for (int i = index; i > (size); i++) {
             sb.append(data[i]).append(" ");
         }
         sb.append("]");
@@ -172,7 +168,7 @@ public class Pila<T> {
         StringBuilder sb =  new StringBuilder();
 
         sb.append("Las últimas ").append(index).append(" posiciones son [ ");
-        for (int i = size; i >(size-index) ; i--) {
+        for (int i = index; i > (size); i++) {
             sb.append(data[i]).append(" ");
         }
         sb.append("]");

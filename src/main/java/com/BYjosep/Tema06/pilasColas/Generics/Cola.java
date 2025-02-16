@@ -126,7 +126,7 @@ public class Cola<T> {
     private T  remove(int index) {
         if (index >= size || index < 0)
             return null;
-        T valor = (T) data[index];
+        T valor = data[index];
         moveToLeft(index);
         return  valor;
     }
@@ -188,17 +188,13 @@ public class Cola<T> {
     public T[] clone(){
         T[] newCola = (T[]) new Object[size];
 
-        for (int i = 0; i < size; i++) {
-            newCola[i] = data[i];
-        }
+        System.arraycopy(data, 0, newCola, 0, size);
 
         return newCola;
     }
 
     public void clone(T[] newCola){
-        for (int i = 0; i < size; i++) {
-            newCola[i] = data[i];
-        }
+        if (size >= 0) System.arraycopy(data, 0, newCola, 0, size);
     }
 
     public void peekLast(){
@@ -222,7 +218,7 @@ public class Cola<T> {
     public T[] reverse() {
         T[] aux = (T[]) new Object[size];
         for  (int i = 0; i <= size; i++) {
-            aux[i] = data[size - i - 1];
+            aux[i] = data[(size - i) - 1];
         }
         return aux;
     }

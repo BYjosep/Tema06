@@ -1,7 +1,6 @@
 package com.BYjosep.Tema06.pilasColas;
 
 import com.BYjosep.Tema06.pilasColas.Generics.Cola;
-import com.BYjosep.Tema06.pilasColas.Generics.DynamicArray;
 import com.BYjosep.Tema06.pilasColas.Generics.Pila;
 
 import java.util.Random;
@@ -12,67 +11,37 @@ public class Testgenerics16_02 {
 
     public static void main(String[] args) {
         testPila();
-
+        System.out.println("\n\n\n");
+        testDynamicArray();
+        System.out.println("\n\n\n");
+        testCola();
     }
 
-    /*
     private static void testPila() {
         System.out.println("Probando pila");
 
         Pila<Object> pila = new Pila<>(5);
 
-        for (int i = 0; i < pila.size(); i++) {
-            pila.push(random.nextInt(0,1000));
-            System.out.printf("%s \n", pila.toString());
-        }
-        pila.reverse();
-        System.out.printf("%s \n", pila.toString());
-        Object[] pila2;
-        pila2 = pila.clone();
-        System.out.printf("Clon de la pila:\n%s \n", pila2.toString());
-
-        for (int i = 0; i < pila.size(); i++) {
-            pila.push(random.nextInt(0,1000));
-            System.out.printf("%s \n", pila.toString());
-        }
-        pila.peek(pila.size()-3);
-        pila.clear();
-        System.out.println(pila.toString());
-        System.out.println("Test de pila finalizado");
-    }
-
-
-     */
-
-
-    private static void testPila() {
-        System.out.println("Probando pila");
-
-        // Crear una pila con capacidad inicial para 5 elementos
-        Pila<Object> pila = new Pila<>(5);
-
-        // Generar números aleatorios y añadirlos a la pila
-        int cantidadNumeros = 5; // Cantidad de números a generar
+        int cantidadNumeros = 5;
         System.out.println("Añadiendo números aleatorios a la pila:");
         for (int i = 0; i < cantidadNumeros; i++) {
-            int numeroAleatorio = random.nextInt(0, 1000); // Generar un número entre 0 y 999
+            int numeroAleatorio = random.nextInt(0, 1000);
             pila.push(numeroAleatorio);
             System.out.printf("Contenido de la pila después de añadir: %s\n", pila);
         }
 
-        // Invertir el orden de los elementos en la pila
         System.out.println("\nInvirtiendo el orden de la pila...");
         pila.reverse();
         System.out.printf("Contenido de la pila después de invertir: %s\n", pila);
 
-        // Clonar la pila
+
         Object[] pila2 = pila.clone();
         System.out.println("\nClon de la pila:");
         for (Object elemento : pila2) {
             System.out.println(elemento);
         }
 
-        // Añadir más números aleatorios a la pila original
+
         System.out.println("\nAñadiendo más números aleatorios a la pila:");
         for (int i = 0; i < cantidadNumeros; i++) {
             int numeroAleatorio = random.nextInt(0, 1000);
@@ -80,15 +49,10 @@ public class Testgenerics16_02 {
             System.out.printf("Contenido de la pila después de añadir: %s\n", pila);
         }
 
-        // Mostrar las últimas posiciones de la pila
-        if (pila.size() >= 3) {
-            System.out.println("\nMostrando las últimas 3 posiciones de la pila:");
-            pila.peek(3);
-        } else {
-            System.out.println("\nLa pila no tiene suficientes elementos para mostrar las últimas 3 posiciones.");
-        }
+        System.out.println("\nMostrando las últimas 3 posiciones de la pila:");
+        System.out.println(pila.peekToStr(3));
 
-        // Limpiar la pila
+
         System.out.println("\nLimpiando la pila...");
         pila.clear();
         System.out.printf("Contenido de la pila después de limpiar: %s\n", pila);
@@ -99,10 +63,48 @@ public class Testgenerics16_02 {
 
     private static void testDynamicArray() {
         System.out.println("Probando dynamicArray");
-        DynamicArray dynamicArray = new DynamicArray(10);
-        for (int i = 0; i < dynamicArray.size(); i++) {
-            dynamicArray.add(random.nextInt(0, 1000));
+
+        Cola<Object> cola = new Cola<>(5);
+
+        int cantidadNumeros = 5;
+        System.out.println("Añadiendo números aleatorios a la cola:");
+        for (int i = 0; i < cantidadNumeros; i++) {
+            int numeroAleatorio = random.nextInt(0, 1000);
+            cola.add(numeroAleatorio);
+            System.out.printf("Contenido de la cola después de añadir: %s\n", cola);
         }
+
+        System.out.println("\nInvirtiendo el orden de la cola...");
+        cola.reverse();
+        System.out.printf("Contenido de la cola después de invertir: %s\n", cola);
+
+
+        Object[] cola2 = cola.clone();
+        System.out.println("\nClon de la cola:");
+        for (Object elemento : cola2) {
+            System.out.println(elemento);
+        }
+
+
+        System.out.println("\nAñadiendo más números aleatorios a la cola:");
+        for (int i = 0; i < cantidadNumeros; i++) {
+            int numeroAleatorio = random.nextInt(0, 1000);
+            cola.add(numeroAleatorio);
+            System.out.printf("Contenido de la cola después de añadir: %s\n", cola);
+        }
+
+        System.out.println("\nMostrando el ultimo elemento de la cola:");
+        System.out.println(cola.peekLastToStr());
+
+        int aux = random.nextInt();
+        System.out.printf("Buscando un elemento al azar en la cola (numero al azar: %d)\n", aux);
+        System.out.println(cola.search(aux));
+        aux = cola.size() - 3;
+        System.out.printf("\n\nBuscando elemento que sí que se encuentra dentro del array %d\n", aux);
+
+        System.out.println("\nLimpiando la cola...");
+        cola.clear();
+        System.out.printf("Contenido de la cola después de limpiar: %s\n", cola);
     }
 
     private static void testCola() {
