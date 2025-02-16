@@ -173,4 +173,57 @@ public class Cola<T> {
     public boolean isEmpty() {
         return size == 0;
     }
+
+    public void clear() {
+        data = (T[]) new Object[data.length];
+    }
+    /*
+    public void clear(){
+        for(int i = 0; i < size; i++){
+            data[i] = null;
+        }
+    }
+    */
+
+    public T[] clone(){
+        T[] newCola = (T[]) new Object[size];
+
+        for (int i = 0; i < size; i++) {
+            newCola[i] = data[i];
+        }
+
+        return newCola;
+    }
+
+    public void clone(T[] newCola){
+        for (int i = 0; i < size; i++) {
+            newCola[i] = data[i];
+        }
+    }
+
+    public void peekLast(){
+        if(size == 0) System.out.println((T)null);
+        else System.out.println(data[size]);
+    }
+
+    public String peekLastToStr(){
+        if(size == 0) return null;
+        else return (String) data[size];
+    }
+
+    public int search(T value){
+        if (size==0) return -1;
+        for (int i = 0; i < size; i++) {
+            if (data[i].equals(value)) return i;
+        }
+        return -1;
+    }
+
+    public T[] reverse() {
+        T[] aux = (T[]) new Object[size];
+        for  (int i = 0; i <= size; i++) {
+            aux[i] = data[size - i - 1];
+        }
+        return aux;
+    }
 }

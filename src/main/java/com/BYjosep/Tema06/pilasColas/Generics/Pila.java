@@ -1,6 +1,6 @@
 package com.BYjosep.Tema06.pilasColas.Generics;
 
-public class Pila<P> {
+public class Pila<T> {
 
     /**
      * Tamaño inicial por defecto
@@ -13,11 +13,11 @@ public class Pila<P> {
     /**
      * Valor con el que reconocemos una condición de error
      */
-    private final P ERROR = null;
+    private final T ERROR = null;
     /**
      * Array donde se van a guardar los valores de la pila
      */
-    private P[] data;
+    private T[] data;
     /**
      * Tamaño actual de la pila
      */
@@ -36,7 +36,7 @@ public class Pila<P> {
      * @param size Capacidad inicial de la pila
      */
     public Pila(int size) {
-        data = (P[]) new Object[size];
+        data = (T[]) new Object[size];
         this.size = 0;
     }
 
@@ -45,7 +45,7 @@ public class Pila<P> {
      *
      * @param elemento Elemento a añadir
      */
-    public void push(P elemento) {
+    public void push(T elemento) {
         if (isFull()) {
             expand();
         }
@@ -57,7 +57,7 @@ public class Pila<P> {
      * Expande el tamaño de la pila con el factor de crecimiento indicado por GROW_FACTOR
      */
     private void expand() {
-        P[] aux = (P[]) new Object[Math.round(data.length * GROW_FACTOR)];
+        T[] aux = (T[]) new Object[Math.round(data.length * GROW_FACTOR)];
         System.arraycopy(data, 0, aux, 0, data.length);
         data = aux;
     }
@@ -67,8 +67,8 @@ public class Pila<P> {
      *
      * @return El elemento de la cima o Double.NEGATIVE_INFINITY si la pila está vacía
      */
-    public P pop() {
-        P e = ERROR;
+    public T pop() {
+        T e = ERROR;
         if (!isEmpty()) {
             e = data[size - 1];
             size--;
@@ -81,8 +81,8 @@ public class Pila<P> {
      *
      * @return El elemento de la cima o Double.NEGATIVE_INFINITY si la pila está vacía
      */
-    public P top() {
-        P e = ERROR;
+    public T top() {
+        T e = ERROR;
         if (!isEmpty()) {
             e = data[size - 1];
         }
@@ -130,12 +130,19 @@ public class Pila<P> {
         return sb.toString();
     }
 
-    public void clear(P[] pila) {
-        pila = (P[]) new Object[pila.length];
+    public void clear() {
+        data = (T[]) new Object[data.length];
     }
-
-    public P[] clone(){
-        P[] newPila = (P[]) new Object[size];
+    /*
+    public void clear(){
+        for(int i = 0; i < size; i++){
+            data[i] = null;
+        }
+    }
+    */
+    
+    public T[] clone(){
+        T[] newPila = (T[]) new Object[size];
 
         for (int i = 0; i < size; i++) {
             newPila[i] = data[i];
@@ -144,7 +151,7 @@ public class Pila<P> {
         return newPila;
     }
 
-    public void clone(P[] newPila){
+    public void clone(T[] newPila){
         for (int i = 0; i < size; i++) {
             newPila[i] = data[i];
         }
@@ -171,8 +178,8 @@ public class Pila<P> {
         System.out.println(sb);
     }
 
-    public P[] reverse() {
-        P[] aux = (P[]) new Object[size];
+    public T[] reverse() {
+        T[] aux = (T[]) new Object[size];
         for  (int i = 0; i <= size; i++) {
             aux[i] = data[size - i - 1];
         }
