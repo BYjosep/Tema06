@@ -10,10 +10,10 @@ public class Testgenerics16_02 {
     private static final Random random = new Random();
 
     public static void main(String[] args) {
-        testPila();
-        System.out.println("\n\n\n");
-        testDynamicArray();
-        System.out.println("\n\n\n");
+        //testPila();
+        //System.out.println("\n\n\n");
+        //testDynamicArray();
+        //System.out.println("\n\n\n");
         testCola();
     }
 
@@ -64,6 +64,11 @@ public class Testgenerics16_02 {
     private static void testDynamicArray() {
         System.out.println("Probando dynamicArray");
 
+
+    }
+
+    private static void testCola() {
+        System.out.println("Probando cola");
         Cola<Object> cola = new Cola<>(5);
 
         int cantidadNumeros = 5;
@@ -74,16 +79,15 @@ public class Testgenerics16_02 {
             System.out.printf("Contenido de la cola después de añadir: %s\n", cola);
         }
 
-        System.out.println("\nInvirtiendo el orden de la cola...");
-        cola.reverse();
-        System.out.printf("Contenido de la cola después de invertir: %s\n", cola);
+        //System.out.println("\nInvirtiendo el orden de la cola...");
+        //cola.reverse();
+        //System.out.printf("Contenido de la cola después de invertir: %s\n", cola);
 
 
-        Object[] cola2 = cola.clone();
+        Cola cola2 = new Cola<>(cola.size());
         System.out.println("\nClon de la cola:");
-        for (Object elemento : cola2) {
-            System.out.println(elemento);
-        }
+        cola2 = (Cola) cola.clone();
+        System.out.println(cola2);
 
 
         System.out.println("\nAñadiendo más números aleatorios a la cola:");
@@ -105,10 +109,5 @@ public class Testgenerics16_02 {
         System.out.println("\nLimpiando la cola...");
         cola.clear();
         System.out.printf("Contenido de la cola después de limpiar: %s\n", cola);
-    }
-
-    private static void testCola() {
-        System.out.println("Probando cola");
-        Cola cola = new Cola();
     }
 }

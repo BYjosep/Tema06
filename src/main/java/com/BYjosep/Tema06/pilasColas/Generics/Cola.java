@@ -51,8 +51,8 @@ public class Cola<T> {
         return Objects.hash(Arrays.hashCode(data), size);
     }
 
-    public String peek() {
-        return (String) data[size-1];
+    public T peek() {
+        return data[size - 1];
     }
 
     /**
@@ -62,7 +62,7 @@ public class Cola<T> {
      * @return el valor obtenido o ERROR
      */
     private T get(int index) {
-        if (index >= size || index < 0)
+        if (index > size || index < 0)
             return null;
         return  data[index];
     }
@@ -88,7 +88,7 @@ public class Cola<T> {
      * @return true
      */
     private boolean add(int index, T value) {
-        if (index >= size || index < 0)
+        if (index > size || index < 0)
             return false;
         if (isFull())
             expand();
@@ -124,7 +124,7 @@ public class Cola<T> {
     }
 
     private T  remove(int index) {
-        if (index >= size || index < 0)
+        if (index > size || index < 0)
             return null;
         T valor = data[index];
         moveToLeft(index);
@@ -136,11 +136,16 @@ public class Cola<T> {
      * Método de uso interno para ampliar la capacidad del array según el factor de crecimiento
      */
     private void expand() {
-        String[] copy = new String[Math.round(data.length * GROW_FACTOR)];
+        T[] copy = (T[]) new Object[Math.round(data.length * GROW_FACTOR)];
+
+        clone((T) copy);
+        /*
         for (int i = 0; i < size; i++) {
             copy[i] = (String) data[i];
         }
-        data = (T[]) copy;
+
+         */
+        data = copy;
     }
 
     /**
@@ -185,15 +190,15 @@ public class Cola<T> {
     }
     */
 
-    public T[] clone(){
-        T[] newCola = (T[]) new Object[size];
+    public T clone() {
+        T newCola = (T) new Object[size];
 
         System.arraycopy(data, 0, newCola, 0, size);
 
         return newCola;
     }
 
-    public void clone(T[] newCola){
+    public void clone(T newCola) {
         if (size >= 0) System.arraycopy(data, 0, newCola, 0, size);
     }
 
@@ -217,8 +222,12 @@ public class Cola<T> {
 
     public T[] reverse() {
         T[] aux = (T[]) new Object[size];
-        for  (int i = 0; i <= size; i++) {
-            aux[i] = data[(size - i) - 1];
+        int j = 0;
+        for (int i = 0; i < size; i = 0) {
+
+            aux[j] = remove(size - 1);
+            //remove();
+            j++;
         }
         return aux;
     }
