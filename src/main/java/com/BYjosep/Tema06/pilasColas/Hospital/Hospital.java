@@ -1,11 +1,12 @@
-package com.BYjosep.Tema06.pilasColas.Ejercicio6;
+package com.BYjosep.Tema06.pilasColas.Hospital;
+
+import com.BYjosep.Tema06.pilasColas.Generics.Cola;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
-import com.BYjosep.Tema06.pilasColas.Generics.Cola;
 
 public class Hospital {
-    private ColaConsulta[] consultas; // Array de consultas.
+    private final ColaConsulta[] consultas; // Array de consultas.
 
     // Constructor: crea 5 consultas con médicos y pacientes aleatorios.
     public Hospital() {

@@ -1,11 +1,11 @@
-package com.BYjosep.Tema06.pilasColas.Ejercicio6;
+package com.BYjosep.Tema06.pilasColas.Hospital;
 
 import java.time.LocalDateTime;
 
 public class Consulta {
     private int idConsulta = 0;
     private Medico medico;
-    private Pacientes paciente;
+    private final Pacientes paciente;
 
 
     public Consulta(LocalDateTime fechaHoraConsulta,String nombrePaciente, String sipPaciente) {

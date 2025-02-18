@@ -1,10 +1,10 @@
-package com.BYjosep.Tema06.pilasColas.Ejercicio6;
+package com.BYjosep.Tema06.pilasColas.Hospital;
 
 import com.BYjosep.Tema06.pilasColas.Generics.Cola;
 
 public class ColaConsulta {
-    private Medico medico; // Médico asignado a la consulta.
-    private Cola<Pacientes> cola; // Cola de pacientes.
+    private final Medico medico; // Médico asignado a la consulta.
+    private final Cola<Pacientes> cola; // Cola de pacientes.
 
     // Constructor: inicializa el médico y la cola.
     public ColaConsulta(Medico medico) {

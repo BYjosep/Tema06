@@ -1,4 +1,4 @@
-package com.BYjosep.Tema06.pilasColas.Ejercicio6;
+package com.BYjosep.Tema06.pilasColas.Hospital;
 
 import java.time.LocalDateTime;
 
@@ -7,7 +7,7 @@ public class Medico {
 
     private String nombre;
     private String numeroColegiado;
-    private LocalDateTime horaConsulta;
+    private final LocalDateTime horaConsulta;
     private final String NUMERO_COLEGIADO_DEFAULT = "012345";
 
     Medico(String nombre, int numeroColegiado, LocalDateTime horaConsulta) {

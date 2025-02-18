@@ -1,15 +1,16 @@
-package com.BYjosep.Tema06.pilasColas.Ejercicio6;
+package com.BYjosep.Tema06.pilasColas.Hospital;
 
-import com.BYjosep.Tema06.lib.*;
+import com.BYjosep.Tema06.lib.LibInts;
+
 import java.util.Scanner;
 
 public class Main {
 
     // Crear el hospital con 5 consultas y médicos asignados.
-    private static Hospital hospital = new Hospital();
+    private static final Hospital hospital = new Hospital();
 
     // Inicializar el escáner para leer entradas del usuario.
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         menu();
