@@ -34,13 +34,11 @@ public class Testgenerics16_02 {
         pila.reverse();
         System.out.printf("Contenido de la pila después de invertir: %s\n", pila);
 
-
         Object[] pila2 = pila.clone();
         System.out.println("\nClon de la pila:");
         for (Object elemento : pila2) {
             System.out.println(elemento);
         }
-
 
         System.out.println("\nAñadiendo más números aleatorios a la pila:");
         for (int i = 0; i < cantidadNumeros; i++) {
@@ -52,7 +50,6 @@ public class Testgenerics16_02 {
         System.out.println("\nMostrando las últimas 3 posiciones de la pila:");
         System.out.println(pila.peekToStr(3));
 
-
         System.out.println("\nLimpiando la pila...");
         pila.clear();
         System.out.printf("Contenido de la pila después de limpiar: %s\n", pila);
@@ -60,11 +57,8 @@ public class Testgenerics16_02 {
         System.out.println("Test de pila finalizado");
     }
 
-
     private static void testDynamicArray() {
         System.out.println("Probando dynamicArray");
-
-
     }
 
     private static void testCola() {
@@ -79,16 +73,9 @@ public class Testgenerics16_02 {
             System.out.printf("Contenido de la cola después de añadir: %s\n", cola);
         }
 
-        //System.out.println("\nInvirtiendo el orden de la cola...");
-        //cola.reverse();
-        //System.out.printf("Contenido de la cola después de invertir: %s\n", cola);
-
-
-        Cola cola2 = new Cola<>(cola.size());
         System.out.println("\nClon de la cola:");
-        cola2 = (Cola) cola.clone();
+        Cola<Object> cola2 = cola.clone();
         System.out.println(cola2);
-
 
         System.out.println("\nAñadiendo más números aleatorios a la cola:");
         for (int i = 0; i < cantidadNumeros; i++) {
@@ -97,14 +84,16 @@ public class Testgenerics16_02 {
             System.out.printf("Contenido de la cola después de añadir: %s\n", cola);
         }
 
-        System.out.println("\nMostrando el ultimo elemento de la cola:");
+        System.out.println("\nMostrando el último elemento de la cola:");
         System.out.println(cola.peekLastToStr());
 
         int aux = random.nextInt();
-        System.out.printf("Buscando un elemento al azar en la cola (numero al azar: %d)\n", aux);
+        System.out.printf("Buscando un elemento al azar en la cola (número al azar: %d)\n", aux);
         System.out.println(cola.search(aux));
+
         aux = cola.size() - 3;
         System.out.printf("\n\nBuscando elemento que sí que se encuentra dentro del array %d\n", aux);
+        System.out.println(cola.search(aux));
 
         System.out.println("\nLimpiando la cola...");
         cola.clear();

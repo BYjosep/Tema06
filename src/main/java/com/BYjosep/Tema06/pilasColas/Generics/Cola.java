@@ -1,35 +1,19 @@
 package com.BYjosep.Tema06.pilasColas.Generics;
 
-
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Cola<T> {
 
-    /*
-    Como aún no hemos visto las Exception de momento utilizamos el menos infinito para detectar errores
-     */
     private static final String ERROR = null;
-    /* Capacidad inicial por defecto del array */
     private final static int DEFAULT_CAPACITY = 10;
-    /* Factor de crecimiento */
     private final static float GROW_FACTOR = 2f;
-    /* Los datos del array */
     private T[] data;
-    /* Número de elementos del array */
     private int size;
 
-    /**
-     * Crear un array dinámico con la capacidad inicial por defecto
-     */
     public Cola() {
         this(DEFAULT_CAPACITY);
     }
-
-    /**
-     * Crea un array dinámico con la capacidad inicial indicada
-     * @param capacity Capacidad inicial
-     */
 
     public Cola(int capacity) {
         @SuppressWarnings("unchecked")
@@ -37,7 +21,6 @@ public class Cola<T> {
         data = temp;
         size = 0;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -52,41 +35,24 @@ public class Cola<T> {
     }
 
     public T peek() {
-        return data[size - 1];
+        if (isEmpty()) return null; // Si la cola está vacía, retorna null.
+        return data[0]; // Devuelve el primer elemento de la cola.
     }
 
-    /**
-     * Obtiene el elemento que ocupa el índice index
-     *
-     * @param index Índice del elemento a obtener
-     * @return el valor obtenido o ERROR
-     */
     private T get(int index) {
-        if (index > size || index < 0)
+        if (index >= size || index < 0)
             return null;
-        return  data[index];
+        return data[index];
     }
 
-    /**
-     * Añade el elemento indicado al array
-     * @param value Elemento a añadir
-     * @return true
-     */
     public boolean add(T value) {
         if (isFull()) {
-            expand(); // Ampliar la capacidad si está llena.
+            expand();
         }
-        data[size++] = value; // Agregar el valor y aumentar el tamaño.
+        data[size++] = value;
         return true;
     }
 
-
-    /**
-     * Añade el elemento indicado al array en la posición indicada por index
-     * @param index Índice donde se añadirá el elemento
-     * @param value Elemento a añadir
-     * @return true
-     */
     private boolean add(int index, T value) {
         if (index > size || index < 0)
             return false;
@@ -97,10 +63,6 @@ public class Cola<T> {
         return true;
     }
 
-    /**
-     * Método de uso interno para desplazar los elementos a la derecha a partir del índice indicado
-     * @param index Índice a partir del cual se desplazarán los elementos
-     */
     private void moveToRight(int index) {
         for (int i = size; i > index; i--) {
             data[i] = data[i - 1];
@@ -108,10 +70,6 @@ public class Cola<T> {
         size++;
     }
 
-    /**
-     * Método de uso interno para desplazar los elementos a la izquierda a partir del índice indicado
-     * @param index Índice a partir del cual se desplazarán los elementos
-     */
     private void moveToLeft(int index) {
         for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
@@ -120,56 +78,40 @@ public class Cola<T> {
     }
 
     public T remove() {
-        return remove(size-1);
+        if (isEmpty()) return null; // Si la cola está vacía, retorna null.
+        T value = data[0]; // Guarda el primer elemento.
+        moveToLeft(0); // Desplaza los elementos a la izquierda.
+        return value; // Retorna el primer elemento.
     }
 
-    private T  remove(int index) {
-        if (index > size || index < 0)
+    private T remove(int index) {
+        if (index >= size || index < 0)
             return null;
-        T valor = data[index];
+        T value = data[index];
         moveToLeft(index);
-        return  valor;
+        return value;
     }
 
-
-    /**
-     * Método de uso interno para ampliar la capacidad del array según el factor de crecimiento
-     */
     private void expand() {
         T[] copy = (T[]) new Object[Math.round(data.length * GROW_FACTOR)];
-
-        clone((T) copy);
-        /*
-        for (int i = 0; i < size; i++) {
-            copy[i] = (String) data[i];
-        }
-
-         */
+        System.arraycopy(data, 0, copy, 0, size);
         data = copy;
     }
 
-    /**
-     * Obtiene el número de elementos que hay en el array
-     * @return int
-     */
     public int size() {
         return size;
     }
 
-    /**
-     * Método de uso interno para determinar si el array está lleno
-     * @return true si está lleno, false si no lo está
-     */
     private boolean isFull() {
         return size == data.length;
     }
 
     @Override
     public String toString() {
-        if (size == 0) return "[ ]"; // Si la cola está vacía, retorna "[ ]".
+        if (size == 0) return "[ ]";
         StringBuilder sb = new StringBuilder("[ ");
         for (int i = 0; i < size; i++) {
-            sb.append(data[i]).append(" "); // Agregar cada elemento separado por espacios.
+            sb.append(data[i]).append(" ");
         }
         sb.append("]");
         return sb.toString();
@@ -181,39 +123,28 @@ public class Cola<T> {
 
     public void clear() {
         data = (T[]) new Object[data.length];
-    }
-    /*
-    public void clear(){
-        for(int i = 0; i < size; i++){
-            data[i] = null;
-        }
-    }
-    */
-
-    public T clone() {
-        T newCola = (T) new Object[size];
-
-        System.arraycopy(data, 0, newCola, 0, size);
-
-        return newCola;
+        size = 0;
     }
 
-    public void clone(T newCola) {
-        if (size >= 0) System.arraycopy(data, 0, newCola, 0, size);
+    public Cola<T> clone() {
+        Cola<T> newCola = new Cola<>(this.size()); // Crea una nueva cola con la misma capacidad.
+        System.arraycopy(this.data, 0, newCola.data, 0, this.size()); // Copia los elementos.
+        newCola.size = this.size; // Copia el tamaño.
+        return newCola; // Retorna la nueva cola.
     }
 
-    public void peekLast(){
-        if(size == 0) System.out.println((T)null);
-        else System.out.println(data[size]);
+    public T peekLast() {
+        if (isEmpty()) return null; // Si la cola está vacía, retorna null.
+        return data[size - 1]; // Devuelve el último elemento.
     }
 
-    public String peekLastToStr(){
-        if(size == 0) return null;
-        else return (String) data[size];
+    public String peekLastToStr() {
+        if (isEmpty()) return null; // Si la cola está vacía, retorna null.
+        return data[size - 1].toString(); // Devuelve el último elemento como String.
     }
 
-    public int search(T value){
-        if (size==0) return -1;
+    public int search(T value) {
+        if (isEmpty()) return -1;
         for (int i = 0; i < size; i++) {
             if (data[i].equals(value)) return i;
         }
@@ -223,10 +154,8 @@ public class Cola<T> {
     public T[] reverse() {
         T[] aux = (T[]) new Object[size];
         int j = 0;
-        for (int i = 0; i < size; i = 0) {
-
-            aux[j] = remove(size - 1);
-            //remove();
+        for (int i = size - 1; i >= 0; i--) {
+            aux[j] = data[i];
             j++;
         }
         return aux;
