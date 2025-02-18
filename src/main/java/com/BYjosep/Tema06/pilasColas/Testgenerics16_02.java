@@ -4,17 +4,14 @@ import com.BYjosep.Tema06.pilasColas.Generics.Cola;
 import com.BYjosep.Tema06.pilasColas.Generics.DynamicArray;
 import com.BYjosep.Tema06.pilasColas.Generics.Pila;
 
+import java.util.Arrays;
 import java.util.Random;
-
-
-
 
 public class Testgenerics16_02 {
 
-
     public static void main(String[] args) {
-        //testPila();
-        //System.out.println("\n\n\n");
+        testPila();
+        System.out.println("\n\n\n");
         testDynamicArray();
         System.out.println("\n\n\n");
         testCola();
@@ -22,43 +19,44 @@ public class Testgenerics16_02 {
 
     private static void testPila() {
         Random random = new Random();
-        System.out.println("Probando pila");
+        System.out.println("=== TEST PILA CON RANDOM ===");
+        Pila<Integer> pila = new Pila<>();
 
-        Pila<Object> pila = new Pila<>(5);
-
-        int cantidadNumeros = 5;
-        System.out.println("Añadiendo números aleatorios a la pila:");
-        for (int i = 0; i < cantidadNumeros; i++) {
-            int numeroAleatorio = random.nextInt(0, 1000);
-            pila.push(numeroAleatorio);
-            System.out.printf("Contenido de la pila después de añadir: %s\n", pila);
+        // 1. Llenar la pila con 5 números aleatorios
+        System.out.println("\n[1] Añadiendo elementos:");
+        int[] elementos = new int[5];
+        for (int i = 0; i < 5; i++) {
+            elementos[i] = random.nextInt(100);
+            pila.push(elementos[i]);
+            System.out.println("Push(" + elementos[i] + ") -> " + pila);
         }
 
-        System.out.println("\nInvirtiendo el orden de la pila...");
-        pila.reverse();
-        System.out.printf("Contenido de la pila después de invertir: %s\n", pila);
+        // 2. Test search()
+        System.out.println("\n[2] Test search():");
+        System.out.println("search(cima=" + elementos[4] + ") -> " + pila.search(elementos[4]) + " (debe ser 1)");
+        System.out.println("search(base=" + elementos[0] + ") -> " + pila.search(elementos[0]) + " (debe ser 5)");
+        System.out.println("search(noExistente=999) -> " + pila.search(999) + " (debe ser -1)");
 
-        Object[] pila2 = pila.clone();
-        System.out.println("\nClon de la pila:");
-        for (Object elemento : pila2) {
-            System.out.println(elemento);
-        }
+        // 3. Test clone()
+        System.out.println("\n[3] Test clone():");
+        Object[] clon = pila.clone();
+        System.out.println("Clon: " + Arrays.toString(clon) +
+                " igual? " + Arrays.equals(clon, Arrays.stream(elementos).boxed().toArray()) + ")");
 
-        System.out.println("\nAñadiendo más números aleatorios a la pila:");
-        for (int i = 0; i < cantidadNumeros; i++) {
-            int numeroAleatorio = random.nextInt(0, 1000);
-            pila.push(numeroAleatorio);
-            System.out.printf("Contenido de la pila después de añadir: %s\n", pila);
-        }
-
-        System.out.println("\nMostrando las últimas 3 posiciones de la pila:");
+        // 4. Test peek()
+        System.out.println("\n[4] Test peek(3):");
         System.out.println(pila.peekToStr(3));
 
-        System.out.println("\nLimpiando la pila...");
-        pila.clear();
-        System.out.printf("Contenido de la pila después de limpiar: %s\n", pila);
+        // 5. Test reverse()
+        System.out.println("\n[5] Test reverse():");
+        Object[] invertido = pila.reverse();
+        System.out.println("Original: " + Arrays.toString(clon));
+        System.out.println("Reverse: " + Arrays.toString(invertido));
 
-        System.out.println("Test de pila finalizado");
+        // 6. Test clear()
+        System.out.println("\n[6] Test clear():");
+        pila.clear();
+        System.out.println("Pila vacía? " + pila.isEmpty() + " -> " + pila);
     }
 
     private static void testDynamicArray() {
@@ -70,20 +68,19 @@ public class Testgenerics16_02 {
         int cantidadNumeros = 5;
         System.out.println("Añadiendo números aleatorios al DynamicArray:");
         for (int i = 0; i < cantidadNumeros; i++) {
-            int numeroAleatorio = random.nextInt(0, 1000);
+            int numeroAleatorio = random.nextInt(1000);
             dynamicArray.add(numeroAleatorio);
             System.out.printf("Contenido del DynamicArray después de añadir: %s\n", dynamicArray);
         }
 
-        // Clonar el DynamicArray usando clone()
         System.out.println("\nClon del DynamicArray:");
-        DynamicArray<Object> dynamicArray2 = new DynamicArray<>(dynamicArray.size());
-        dynamicArray.clone(dynamicArray2.clone());
-        System.out.println(dynamicArray2);
+        Object[] dynamicArray2 = dynamicArray.clone();
+        for (Object elemento : dynamicArray2) {
+            System.out.println(elemento);
+        }
 
-        // Buscar un elemento usando indexOf(T element)
-        Object elementoABuscar = dynamicArray.get(2); // Buscar el tercer elemento
-        System.out.printf("\nBuscando el elemento %s en el DynamicArray:\n", elementoABuscar); // Cambiado %d por %s
+        Object elementoABuscar = dynamicArray.get(2);
+        System.out.printf("\nBuscando el elemento %s:\n", elementoABuscar);
         int indice = dynamicArray.indexOf(elementoABuscar);
         if (indice != -1) {
             System.out.printf("Elemento encontrado en el índice: %d\n", indice);
@@ -91,23 +88,18 @@ public class Testgenerics16_02 {
             System.out.println("Elemento no encontrado.");
         }
 
-        // Intercambiar elementos usando swap(int index1, int index2)
-        System.out.println("\nIntercambiando el primer y el último elemento del DynamicArray:");
+        System.out.println("\nIntercambiando el primer y último elemento:");
         if (dynamicArray.swap(0, dynamicArray.size() - 1)) {
-            System.out.printf("Contenido del DynamicArray después del intercambio: %s\n", dynamicArray);
-        } else {
-            System.out.println("No se pudo realizar el intercambio (índices inválidos).");
+            System.out.printf("Contenido después del intercambio: %s\n", dynamicArray);
         }
 
-        // Reducir el tamaño del array usando trimToSize()
-        System.out.println("\nReduciendo el tamaño del DynamicArray al número de elementos actual:");
+        System.out.println("\nReduciendo tamaño al mínimo:");
         dynamicArray.trimToSize();
-        System.out.printf("Contenido del DynamicArray después de trimToSize: %s\n", dynamicArray);
+        System.out.printf("Contenido después de trimToSize: %s\n", dynamicArray);
 
-        // Limpiar el DynamicArray usando clear()
         System.out.println("\nLimpiando el DynamicArray...");
         dynamicArray.clear();
-        System.out.printf("Contenido del DynamicArray después de limpiar: %s\n", dynamicArray);
+        System.out.printf("Contenido después de limpiar: %s\n", dynamicArray);
 
         System.out.println("Test de DynamicArray finalizado");
     }
@@ -144,12 +136,11 @@ public class Testgenerics16_02 {
         System.out.println(cola.search(aux));
 
         aux = cola.size() - 3;
-        System.out.printf("\n\nBuscando elemento que sí que se encuentra dentro del array %d\n", aux);
+        System.out.printf("\n\nBuscando elemento que sí que se encuentra dentro de la cola %d\n", aux);
         System.out.println(cola.search(aux));
 
         System.out.println("\nLimpiando la cola...");
         cola.clear();
         System.out.printf("Contenido de la cola después de limpiar: %s\n", cola);
     }
-
 }

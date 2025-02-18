@@ -1,11 +1,11 @@
 package com.BYjosep.Tema06.pilasColas.Generics;
 
 import java.util.Arrays;
+import java.util.EmptyStackException;
 import java.util.Objects;
 
 public class DynamicArray<T> {
 
-    private final T ERROR = null;
     private final static int DEFAULT_CAPACITY = 10;
     private final static float GROW_FACTOR = 2f;
     private T[] data;
@@ -15,6 +15,7 @@ public class DynamicArray<T> {
         this(DEFAULT_CAPACITY);
     }
 
+    @SuppressWarnings("unchecked")
     public DynamicArray(int capacity) {
         data = (T[]) new Object[capacity];
         size = 0;
@@ -22,19 +23,31 @@ public class DynamicArray<T> {
 
     @Override
     public boolean equals(Object o) {
+        if (o == this) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DynamicArray<?> that = (DynamicArray<?>) o;
-        return size == that.size && Objects.deepEquals(data, that.data);
+        if (size != that.size) return false;
+
+        for (int i = 0; i < size; i++) {
+            if (!Objects.deepEquals(data[i], that.data[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Arrays.hashCode(data), size);
+        int result = Objects.hash(size);
+        for (int i = 0; i < size; i++) {
+            result = 31 * result + Objects.hashCode(data[i]);
+        }
+        return result;
     }
 
     public T get(int index) {
         if (index >= size || index < 0)
-            return ERROR;
+            throw new IndexOutOfBoundsException("Índice fuera de rango: " + index);
         return data[index];
     }
 
@@ -71,7 +84,7 @@ public class DynamicArray<T> {
 
     public T remove(int index) {
         if (index >= size || index < 0)
-            return ERROR;
+            throw new IndexOutOfBoundsException("Índice fuera de rango: " + index);
         T value = data[index];
         moveToLeft(index);
         return value;
@@ -79,7 +92,7 @@ public class DynamicArray<T> {
 
     public boolean remove(T value) {
         for (int i = 0; i < size; i++) {
-            if (data[i].equals(value)) {
+            if (Objects.equals(data[i], value)) {
                 moveToLeft(i);
                 return true;
             }
@@ -95,7 +108,8 @@ public class DynamicArray<T> {
     }
 
     private void expand() {
-        T[] copy = (T[]) new Object[Math.round(data.length * GROW_FACTOR)];
+        int newCapacity = Math.max(DEFAULT_CAPACITY, Math.round(data.length * GROW_FACTOR));
+        T[] copy = (T[]) new Object[newCapacity];
         System.arraycopy(data, 0, copy, 0, size);
         data = copy;
     }
@@ -118,35 +132,32 @@ public class DynamicArray<T> {
         return sb.toString();
     }
 
+    @SuppressWarnings("unchecked")
     public void clear() {
         data = (T[]) new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
     public T[] clone() {
-        T[] newDynamicArray = (T[]) new Object[size];
-        System.arraycopy(data, 0, newDynamicArray, 0, size);
-        return newDynamicArray;
+        return Arrays.copyOf(data, size);
     }
 
-
-
-    public void clone(T[] newDynamicArray) {
-        System.arraycopy(data, 0, newDynamicArray, 0, size);
+    public void copyTo(T[] destination) {
+        if (destination.length < size) {
+            throw new IllegalArgumentException("Array destino demasiado pequeño");
+        }
+        System.arraycopy(data, 0, destination, 0, size);
     }
 
     public int indexOf(T value) {
-        if (size == 0) return -1;
         for (int i = 0; i < size; i++) {
-            if (data[i].equals(value)) return i;
+            if (Objects.equals(data[i], value)) return i;
         }
         return -1;
     }
 
     public void trimToSize() {
-        T[] aux = (T[]) new Object[size];
-        System.arraycopy(data, 0, aux, 0, size);
-        data = aux;
+        data = Arrays.copyOf(data, size);
     }
 
     public boolean swap(int index1, int index2) {
