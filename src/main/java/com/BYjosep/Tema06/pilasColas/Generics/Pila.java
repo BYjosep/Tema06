@@ -78,7 +78,7 @@ public class Pila<T> {
 
     @SuppressWarnings("unchecked")
     public T[] clone() {
-        return (T[]) Arrays.copyOf(data, size);
+        return Arrays.copyOf(data, size);
     }
 
     public void copyTo(T[] destination) {
@@ -106,6 +106,9 @@ public class Pila<T> {
 
     @SuppressWarnings("unchecked")
     public T[] reverse() {
+        if (isEmpty() || size == 1) {
+            return data;
+        }
         T[] aux = (T[]) new Object[size];
         for (int i = 0; i < size; i++) {
             aux[i] = data[size - i - 1];
@@ -113,6 +116,9 @@ public class Pila<T> {
         return aux;
     }
     public int search(T element) {
+        if (isEmpty()) {
+            return -1;
+        }
         for (int i = size - 1; i >= 0; i--) {
             if (Objects.equals(data[i], element)) {
                 return size - i; // Distancia desde la cima

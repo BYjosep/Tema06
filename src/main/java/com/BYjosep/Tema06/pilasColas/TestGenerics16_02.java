@@ -7,7 +7,7 @@ import com.BYjosep.Tema06.pilasColas.Generics.Pila;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Testgenerics16_02 {
+public class TestGenerics16_02 {
 
     public static void main(String[] args) {
         testPila();
@@ -41,7 +41,7 @@ public class Testgenerics16_02 {
         System.out.println("\n[3] Test clone():");
         Object[] clon = pila.clone();
         System.out.println("Clon: " + Arrays.toString(clon) +
-                " igual? " + Arrays.equals(clon, Arrays.stream(elementos).boxed().toArray()) + ")");
+                "\nEs igual al original \nArray original" + pila + "\n" + Arrays.equals(clon, Arrays.stream(elementos).boxed().toArray()));
 
         // 4. Test peek()
         System.out.println("\n[4] Test peek(3):");
