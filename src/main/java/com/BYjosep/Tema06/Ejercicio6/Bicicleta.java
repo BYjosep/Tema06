@@ -10,7 +10,8 @@ public class Bicicleta {
     private final boolean tieneMotor;
     private final GregorianCalendar fechaFabricacion;
     private final float precio;
-    private final int existencias;
+    private int existencias;
+
 
     public Bicicleta(String marca, String modelo, float peso,
                      boolean tieneMotor, GregorianCalendar fechaFabricacion,
@@ -25,7 +26,9 @@ public class Bicicleta {
         this.existencias = existencias;
     }
 
+
     public Bicicleta() {
+
         this.referencia = referencia++;
         this.marca = null;
         this.modelo = null;
@@ -34,6 +37,7 @@ public class Bicicleta {
         this.fechaFabricacion = null;
         this.precio = 0;
         this.existencias = 0;
+
     }
 
 
@@ -50,4 +54,17 @@ public class Bicicleta {
                 ", existencias=" + existencias +
                 '}';
     }
+
+    public int getReferencia() {
+        return referencia;
+    }
+
+    public int getExistencias() {
+        return existencias;
+    }
+
+    public void setExistencias(int i) {
+        ++existencias;
+    }
+
 }
