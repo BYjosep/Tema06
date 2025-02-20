@@ -1,22 +1,26 @@
 package com.BYjosep.Tema06.Ejercicio6;
 
+import com.BYjosep.Tema06.lib.LibInts;
+
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.TimeZone;
 
-public class almacenBicicletas {
+
+
+public class Almacen {
 
     Scanner scanner = new Scanner(System.in);
     Bicicleta[] bicicletas;
     private int size;
     private int maxSize;
 
-    public almacenBicicletas(int maxSize) {
+    public Almacen(int maxSize) {
         bicicletas = new Bicicleta[maxSize];
         size = 0;
     }
 
-    public boolean addBicicleta(Bicicleta bicicleta) {
+    public boolean addBicicleta() {
 
         int existencias;
 
@@ -29,9 +33,9 @@ public class almacenBicicletas {
             return true;
         }
         if (size < maxSize) {
-            System.out.println(verAlmacen());
+            System.out.println(toString());
             System.out.println("Desea añadir una bicicleta nueva? S/n default n");
-            if (scanner.next().equalsIgnoreCase("S")) {
+            if (scanner.next().equalsIgnoreCase("n")) {
                 System.out.println("Ingrese el id de la Bicicleta: ");
                 int idBicicleta = Integer.parseInt(scanner.next());
                 for (int i = 0; i < size; i++) {
@@ -49,7 +53,8 @@ public class almacenBicicletas {
     }
 
 
-    public void sellBicicleta(int referencia) {
+    public void sellBicicleta() {
+        int referencia = LibInts.ingresarUnNumero("Ingrese la referencia del bicicleta: ");
         if (size == 0 || size > maxSize) {
             throw new ArrayStoreException("No se pueden quitar bicicletas");
         }
@@ -64,13 +69,81 @@ public class almacenBicicletas {
 
     }
 
-    public String verAlmacen() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            sb.append(bicicletas[i].toString());
+    public void consultarBicicleta() {
+        if (size >= 0 || size > maxSize) {
+            throw new ArrayStoreException("No se pueden consultar la bicicleta");
         }
+        int opcopn = LibInts.ingresarUnNumero("""
+                ************************
+                ** CONSULTA BICICLETA **
+                ************************
+                1.- Consultar por referencia
+                2.- Consultar por marca
+                3.- Consultar por modelo
+                ---------------------------------
+                0.- Volver al menú principal
+                """, 0, 4, "Opcion indicada invalida");
+        boolean status = false;
+        switch (opcopn) {
+
+            case 0 -> {
+            }
+
+            case 1 -> {
+                System.out.println("Ingrese el referencia que desea consultar");
+                int referencia = Integer.parseInt(scanner.next());
+                for (int i = 0; i < size; i++) {
+                    if (referencia == bicicletas[i].getReferencia()) {
+                        System.out.println(bicicletas[i].toString());
+                        status = true;
+                        break;
+                    }
+                    if (!status) {
+                        System.out.println("La referencia no existe");
+                    }
+                }
+            }
+            case 2 -> {
+                System.out.println("Ingreseso la marca que desea consultar");
+                String marca = scanner.nextLine();
+                for (int i = 0; i < size; i++) {
+                    if (marca.equalsIgnoreCase(bicicletas[i].getMarca()))
+                        System.out.println(bicicletas[i].toString());
+                    status = true;
+                    break;
+                }
+                if (!status) {
+                    System.out.println("La marca no existe");
+                }
+            }
+            case 3 -> {
+                System.out.println("Ingreseso la modelo que desea consultar");
+                String modelo = scanner.nextLine();
+                for (int i = 0; i < size; i++) {
+                    if (modelo.equalsIgnoreCase(bicicletas[i].getModelo()))
+                        System.out.println(bicicletas[i].toString());
+                    status = true;
+                    break;
+                }
+                if (!status) {
+                    System.out.println("El modelo no existe");
+                }
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Almacén").append("{\n");
+        for (int i = 0; i < size; i++) {
+            sb.append(bicicletas[i].toString()).append("\n");
+        }
+        sb.append("}\n");
+
         return sb.toString();
     }
+
 
     private void crearBicicleta() {
         String marca, modelo;
@@ -105,4 +178,8 @@ public class almacenBicicletas {
         size++;
     }
 
+
+
 }
+
+

@@ -63,6 +63,14 @@ public class Bicicleta {
         return existencias;
     }
 
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
     public void setExistencias(int i) {
         ++existencias;
     }
