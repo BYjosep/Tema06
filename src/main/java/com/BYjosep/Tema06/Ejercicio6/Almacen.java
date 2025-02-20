@@ -13,29 +13,31 @@ public class Almacen {
     Scanner scanner = new Scanner(System.in);
     Bicicleta[] bicicletas;
     private int size;
-    private int maxSize;
+    private final int maxSize;
 
     public Almacen(int maxSize) {
+        this.maxSize = maxSize;
         bicicletas = new Bicicleta[maxSize];
         size = 0;
     }
 
-    public boolean addBicicleta() {
+    public void addBicicleta() {
 
-        int existencias;
-
-        if (size < 0 || size > maxSize) {
+        if (size < 0) {
             throw new ArrayStoreException("No se ha podido añadir mas bicicletas");
+        } else if (size == maxSize) {
+            return;
         }
+
 
         if (size == 0) {
             crearBicicleta();
-            return true;
+            return;
         }
         if (size < maxSize) {
-            System.out.println(toString());
             System.out.println("Desea añadir una bicicleta nueva? S/n default n");
             if (scanner.next().equalsIgnoreCase("n")) {
+                System.out.println(this);
                 System.out.println("Ingrese el id de la Bicicleta: ");
                 int idBicicleta = Integer.parseInt(scanner.next());
                 for (int i = 0; i < size; i++) {
@@ -49,7 +51,6 @@ public class Almacen {
             }
         }
 
-        return true;
     }
 
 

@@ -1,5 +1,6 @@
 package com.BYjosep.Tema06.Ejercicio6;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class Bicicleta {
@@ -43,13 +44,15 @@ public class Bicicleta {
 
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaFormateada = sdf.format(fechaFabricacion.getTime());
         return "Bicicleta{" +
                 "referencia=" + referencia +
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", peso=" + peso +
-                ", tieneMotor=" + tieneMotor +
-                ", fechaFabricacion=" + fechaFabricacion +
+                ", tieneMotor= " + tieneMotor +
+                ", fechaFabricacion= " + fechaFormateada +
                 ", precio=" + precio +
                 ", existencias=" + existencias +
                 '}';

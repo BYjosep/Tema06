@@ -40,7 +40,7 @@ public class Main {
                     almacen.consultarBicicleta();
                 }
                 case 4 -> {
-                    System.out.println(almacen.toString());
+                    System.out.println(almacen);
                 }
 
             }
