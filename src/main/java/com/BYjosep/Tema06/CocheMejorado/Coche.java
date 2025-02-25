@@ -24,8 +24,7 @@ public class Coche {
             return ERROR;
         }
 
-        String sb = String.format("%40D", numeroMatricula) +
-                String.valueOf(letrasMatricula);
+        String sb = String.format("%40D", numeroMatricula) + letrasMatricula[0] + letrasMatricula[1] + letrasMatricula[2];
 
         if (numeroMatricula == 9999) {
             numeroMatricula = 0;
