@@ -1,5 +1,8 @@
 package com.BYjosep.Tema06.CocheMejorado;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Coche {
     private final String ERROR = "No se pueden añadir más matrículas";
     private final String matricula;
@@ -19,8 +22,13 @@ public class Coche {
     }
 
 
+    /**
+     * Crea una matricula
+     *
+     * @return devuelve un String de una matricula
+     */
     private String setMatricula() {
-        if (letrasMatricula[0] >= 'Z' && numeroMatricula >= 9999) {
+        if (letrasMatricula[0] >= 'Z' && letrasMatricula[1] >= 'Z' && letrasMatricula[2] >= 'Z' && numeroMatricula >= 9999) {
             return ERROR;
         }
 
@@ -47,5 +55,31 @@ public class Coche {
         }
 
         return sb;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Coche coche = (Coche) o;
+        return numeroMatricula == coche.numeroMatricula && pinturaMetalizada == coche.pinturaMetalizada && Objects.equals(matricula, coche.matricula) && Objects.deepEquals(letrasMatricula, coche.letrasMatricula) && Objects.equals(marca, coche.marca) && Objects.equals(modelo, coche.modelo) && Objects.equals(color, coche.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matricula, numeroMatricula, Arrays.hashCode(letrasMatricula), marca, modelo, color, pinturaMetalizada);
+    }
+
+    @Override
+    public String toString() {
+        return "Coche{" +
+                "ERROR='" + ERROR + '\'' +
+                ", matricula='" + matricula + '\'' +
+                ", numeroMatricula=" + numeroMatricula +
+                ", letrasMatricula=" + Arrays.toString(letrasMatricula) +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", color='" + color + '\'' +
+                ", pinturaMetalizada=" + pinturaMetalizada +
+                '}';
     }
 }
