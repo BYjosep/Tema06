@@ -8,7 +8,9 @@ public class Main {
 
         Asignatoras asignatura = new Asignatoras(asignaturas, codigo, curso);
 
-        System.out.printf("nombre %S, codigo %d, curso %S ", asignatura.getNombre(), asignatura.getCodigo(), asignatura.getCurso());
+        System.out.printf("nombre %S, codigo %d, curso %S ",
+                asignatura.getNombre(), asignatura.getCodigo(),
+                asignatura.getCurso());
     }
 
 }
