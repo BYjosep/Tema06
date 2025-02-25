@@ -37,4 +37,13 @@ public class Asignatoras {
     public int hashCode() {
         return Objects.hash(nombre, curso, codigo);
     }
+
+    @Override
+    public String toString() {
+        return "Asignatoras{" +
+                "nombre='" + nombre + '\'' +
+                ", curso='" + curso + '\'' +
+                ", codigo=" + codigo +
+                '}';
+    }
 }
