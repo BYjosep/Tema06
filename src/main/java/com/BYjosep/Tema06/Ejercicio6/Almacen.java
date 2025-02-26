@@ -21,18 +21,18 @@ public class Almacen {
         size = 0;
     }
 
-    public void addBicicleta() {
+    public boolean addBicicleta() {
 
         if (size < 0) {
             throw new ArrayStoreException("No se ha podido añadir mas bicicletas");
         } else if (size == maxSize) {
-            return;
+            return false;
         }
 
 
         if (size == 0) {
             crearBicicleta();
-            return;
+            return true;
         }
         if (size < maxSize) {
             System.out.println("Desea añadir una bicicleta nueva? S/n default n");
@@ -51,6 +51,7 @@ public class Almacen {
             }
         }
 
+        return true;
     }
 
 
@@ -99,9 +100,10 @@ public class Almacen {
                         status = true;
                         break;
                     }
-                    if (!status) {
-                        System.out.println("La referencia no existe");
-                    }
+
+                }
+                if (!status) {
+                    System.out.println("La referencia no existe");
                 }
             }
             case 2 -> {
@@ -148,7 +150,7 @@ public class Almacen {
 
     private void crearBicicleta() {
         String marca, modelo;
-        float precio, peso;
+        float precio, peso, tamanoBicicleta;
         boolean tieneMotor;
         GregorianCalendar fechaFabricacion;
         int existencias;
@@ -161,6 +163,9 @@ public class Almacen {
 
         System.out.println("Ingrese la peso");
         peso = Float.parseFloat(scanner.nextLine());
+
+        System.out.println("Ingrese el tamaño de la bicicleta");
+        tamanoBicicleta = Float.parseFloat(scanner.nextLine());
 
         System.out.println("Ingrese la fecha de fabricacion en formato DD/MM/YYYY");
         String aux = scanner.nextLine();
@@ -175,7 +180,7 @@ public class Almacen {
         System.out.println("Ingrese el precio de la bicicleta");
         precio = Float.parseFloat(scanner.nextLine());
 
-        bicicletas[size] = new Bicicleta(marca, modelo, peso, tieneMotor, fechaFabricacion, precio, existencias);
+        bicicletas[size] = new Bicicleta(marca, modelo, peso, tamanoBicicleta, tieneMotor, fechaFabricacion, precio, existencias);
         size++;
     }
 

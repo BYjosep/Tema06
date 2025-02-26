@@ -11,10 +11,11 @@ public class Bicicleta {
     private final boolean tieneMotor;
     private final GregorianCalendar fechaFabricacion;
     private final float precio;
+    private final float tamanoDeLaRueda;
     private int existencias;
 
 
-    public Bicicleta(String marca, String modelo, float peso,
+    public Bicicleta(String marca, String modelo, float peso, float tamanoDeLaRueda,
                      boolean tieneMotor, GregorianCalendar fechaFabricacion,
                      float precio, int existencias) {
         this.referencia = referencia++;
@@ -24,21 +25,8 @@ public class Bicicleta {
         this.tieneMotor = tieneMotor;
         this.fechaFabricacion = fechaFabricacion;
         this.precio = precio;
+        this.tamanoDeLaRueda = tamanoDeLaRueda;
         this.existencias = existencias;
-    }
-
-
-    public Bicicleta() {
-
-        this.referencia = referencia++;
-        this.marca = null;
-        this.modelo = null;
-        this.peso = 0;
-        this.tieneMotor = false;
-        this.fechaFabricacion = null;
-        this.precio = 0;
-        this.existencias = 0;
-
     }
 
 
@@ -51,6 +39,7 @@ public class Bicicleta {
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", peso=" + peso +
+                ", tamño de la rueda= " + tamanoDeLaRueda + '\'' +
                 ", tieneMotor= " + tieneMotor +
                 ", fechaFabricacion= " + fechaFormateada +
                 ", precio=" + precio +

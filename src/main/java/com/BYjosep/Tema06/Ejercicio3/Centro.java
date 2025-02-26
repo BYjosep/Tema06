@@ -19,6 +19,9 @@ public class Centro {
      * Metodo para crear un alumno nuevo
      */
     public void crearAlumno() {
+        if (size == MAX_ALUMNOS) {
+            return;
+        }
         int nia;
 
         do {
@@ -105,7 +108,7 @@ public class Centro {
         }
     }
 
-    private void consultaPorNia() {
+    private Alumno consultaPorNia(int nia) {
         StringBuilder sb = new StringBuilder();
 
         Alumno auxAlumno = new Alumno();
@@ -113,14 +116,12 @@ public class Centro {
         aux[0] = alumnos[0];
         for (int i = 0; i < size; i++) {
 
-            if (alumnos[i].getNia() < aux[i].getNia()) {
-                auxAlumno = aux[i];
-                aux[i - 1] = alumnos[i];
-                aux[i] = auxAlumno;
-
+            if (alumnos[i].getNia() == nia) {
+                return alumnos[i];
             }
 
         }
+        return null;
     }
 
     private void consultaPorApellido() {

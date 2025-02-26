@@ -1,6 +1,7 @@
 package com.BYjosep.Tema06.Ejercicio3;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Alumno {
     private final int nia;
@@ -60,7 +61,28 @@ public class Alumno {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Alumno alumno = (Alumno) o;
+        return nia == alumno.nia && telefono == alumno.telefono && Objects.equals(nombre, alumno.nombre) && Objects.equals(apellido, alumno.apellido) && Objects.equals(fechaNacimiento, alumno.fechaNacimiento) && Objects.equals(grupo, alumno.grupo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nia, nombre, apellido, fechaNacimiento, grupo, telefono);
+    }
 
 
-
+    @Override
+    public String toString() {
+        return "Alumno{" +
+                "nia=" + nia +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", grupo='" + grupo + '\'' +
+                ", telefono=" + telefono +
+                '}';
+    }
 }
