@@ -19,6 +19,14 @@ public class Alumno {
         this.telefono = telefono;
     }
 
+    Alumno() {
+        this.nia = 0;
+        this.nombre = null;
+        this.apellido = null;
+        this.fechaNacimiento = null;
+        this.grupo = null;
+        this.telefono = 0;
+    }
 
     /*
      ***********
