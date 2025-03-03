@@ -3,15 +3,13 @@ package com.BYjosep.Tema06.ejercicio7;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Pacientes {
-    public enum constantes {
+public class AtencionPaciente {
+    public enum Constantes {
         TEMPERATURA, PPM, TENSION_SISTOLICA, TENSIOM_DIASTOLICA
     }
 
-    private final int sip;
-    private final String nombre;
-    private final char sexo;
-    private final int edad;
+    private final Paciente paciente;
+
     private final LocalDate fechaEntrada;
     private final LocalTime horaEntrada;
     private final String sintoma;
@@ -21,20 +19,22 @@ public class Pacientes {
     private String motivoAlta;
     private boolean altaMedica;
 
-    public Pacientes(int sip, String nombre, char sexo, int edad,
-                     LocalDate fechaEntrada, LocalTime horaEntrada,
-                     String sintoma) {
-        this.sip = sip;
-        this.nombre = nombre;
-        this.sexo = sexo;
-        this.edad = edad;
+    public AtencionPaciente(Paciente paciente, LocalDate fechaEntrada,
+                            LocalTime horaEntrada, String sintoma,
+                            float[] preRev, LocalDate fechaAlta,
+                            LocalTime horaAlta, String motivoAlta, boolean altaMedica) {
+
+        this.paciente = paciente;
         this.fechaEntrada = fechaEntrada;
         this.horaEntrada = horaEntrada;
         this.sintoma = sintoma;
-        this.preRev = new float[4];
-        this.altaMedica = false;
-
+        this.preRev = preRev;
+        this.fechaAlta = fechaAlta;
+        this.horaAlta = horaAlta;
+        this.motivoAlta = motivoAlta;
+        this.altaMedica = altaMedica;
     }
+
 
     /**
      * setter para hacer la medicion con las constantes vitales
@@ -60,6 +60,7 @@ public class Pacientes {
 
     }
 
+
     public void setFechaAlta(LocalDate fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
@@ -83,7 +84,7 @@ public class Pacientes {
     }
 
     private boolean setPpm(int ppm) {
-        if (preRev[1] == 0 && ppm == 0)return false;
+        if (preRev[1] == 0 && ppm == 0) return false;
         preRev[1] = ppm;
         return true;
     }
@@ -95,84 +96,9 @@ public class Pacientes {
     }
 
     private boolean setTensionDiastolica(float tensionDiastolica) {
-        if (preRev[3] == 0 && tensionDiastolica == 0)return false;
+        if (preRev[3] == 0 && tensionDiastolica == 0) return false;
         preRev[3] = tensionDiastolica;
         return true;
     }
 
-
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Pacientes{").append("sip=").append(sip);
-        sb.append(", nombre='").append(nombre).append('\'');
-        sb.append(", sexo=").append(sexo);
-        sb.append(", edad=").append(edad);
-        sb.append(", fechaEntrada=").append(fechaEntrada);
-        sb.append(", horaEntrada=").append(horaEntrada);
-        sb.append(", sintoma=").append(sintoma);
-        if (preRev != null) {
-            sb.append(", preRev=");
-
-            for (int i = 0; i < preRev.length; i++) {
-                sb.append(constantes.valueOf(String.valueOf(i))).append("=").append(preRev[i]);
-            }
-        }
-
-
-        sb.append('}');
-
-        return sb.toString();
-    }
-
-
-    public int getSip() {
-        return sip;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public char getSexo() {
-        return sexo;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public LocalDate getFechaEntrada() {
-        return fechaEntrada;
-    }
-
-    public LocalTime getHoraEntrada() {
-        return horaEntrada;
-    }
-
-    public String getSintoma() {
-        return sintoma;
-    }
-
-    public float[] getPreRev() {
-        return preRev;
-    }
-
-    public LocalDate getFechaAlta() {
-        return fechaAlta;
-    }
-
-    public LocalTime getHoraAlta() {
-        return horaAlta;
-    }
-
-    public String getMotivoAlta() {
-        return motivoAlta;
-    }
-
-    public boolean getAltaMedica() {
-        return altaMedica;
-    }
 }
